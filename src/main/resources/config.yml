@@ -1,0 +1,13 @@
+action:
+
+  hack:
+    1:
+      - kick $player $reason
+    2:
+      - tempban $player 5d $reason
+
+  chat:
+    1:
+      - mute $player 10m $reason
+
+remove violation after the hours: 10
