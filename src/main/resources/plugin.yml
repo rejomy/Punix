@@ -1,5 +1,5 @@
 main: me.rejomy.punix.Main
 version: 1.0
-name: Punix
+name: PuniX
 commands:
   punix:

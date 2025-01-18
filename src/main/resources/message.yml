@@ -1,0 +1,5 @@
+commands:
+  help:
+    - ""
+    - " &7/punix $player $group $vl $reason"
+    - ""

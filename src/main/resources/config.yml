@@ -1,13 +1,28 @@
+#
+# available time unit: day(d), hour(h), minute(m), second(s)
+# available command: $broadcast (notify all player) or empty
+#
+
+# You can create punishment section.
+# Placeholders: $broadcast
 action:
-
-  hack:
+  group1:
     1:
-      - kick $player $reason
-    2:
-      - tempban $player 5d $reason
+      - ban $player $reason
 
-  chat:
+    # How much time must pass after add the violation.
+    reduce-after: 1m
+
+  group2:
     1:
       - mute $player 10m $reason
+    3:
+      - mute $player 20m $reason
 
-remove violation after the hours: 10
+    reduce-after: 1h
+
+# How much time must pass after inactivity for us to remove the date.
+clear-player-data-after: 5d
+
+# Should we send logs when anyone use /punix command
+log-in-console: true

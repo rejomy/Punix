@@ -4,41 +4,38 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class FileUtil {
+    public void clearOldFiles(File directory, long timeInMillis) {
+        if(!directory.exists()) return;
 
-    public File file;
-    public YamlConfiguration configuration;
+        for(File file : directory.listFiles()) {
+            if(System.currentTimeMillis() - file.lastModified() < timeInMillis) continue;
 
-    public FileUtil(String fileName, File pathToFile) {
-        file = new File(pathToFile, fileName + ".yml");
-
-        if(!file.exists()) {
-            createNewFile();
+            file.delete();
         }
-
-        configuration = YamlConfiguration.loadConfiguration(file);
-
     }
 
-    public void createNewFile() {
-
+    public static void create(File file) {
         try {
             file.createNewFile();
         } catch (IOException exception) {
             exception.printStackTrace();
         }
-
     }
 
-    public void saveYamlIntoFile() {
-
+    public static void save(YamlConfiguration config, File file) {
         try {
-            configuration.save(file);
+            config.save(file);
         } catch (IOException exception) {
             exception.printStackTrace();
         }
-
     }
 
+    public static File getFileFromDirectory(File directory, String fileName) {
+        return Arrays.stream(directory.listFiles())
+                .filter(file -> file.getName().equalsIgnoreCase(fileName))
+                .findAny().orElse(new File(directory, fileName));
+    }
 }
